@@ -10,11 +10,11 @@ public class UserServiceImpl implements IUserService {
     private IUserDao userDao = new UserDaoImpl();
 
     @Override
-    public void registerUser(User user) {
+    public int registerUser(User user) {
         if (userDao.find(user.getUserName()) != null) {
             // 用户名已经存在，抛出异常 TODO
         }
-        userDao.add(user);
+        return userDao.add(user);
     }
 
     @Override
