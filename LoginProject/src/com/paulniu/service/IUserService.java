@@ -7,7 +7,7 @@ public interface IUserService {
     /**
      * 提供注册服务
      */
-    void registerUser(User user);
+    int registerUser(User user);
 
     /**
      * 提供登录服务

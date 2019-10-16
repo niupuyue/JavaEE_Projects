@@ -14,28 +14,29 @@ public class UserDaoImpl implements IUserDao {
 
     //JDBC驱动名以及数据库URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/javawebdb";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/webproject";
     // 数据库的用户名和密码
     static final String USER = "root";
-    static final String PASS = "root";
+    static final String PASS = "123456";
 
     @Override
     public User find(String userName, String userPwd) {
         User user = new User();
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement stmt = null;
         try {
             // 注册 JDBC 驱动器
             Class.forName("com.mysql.jdbc.Driver");
 
             // 打开一个连接
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-
-            // 执行 SQL 查询
-            stmt = conn.createStatement();
             String sql;
-            sql = "SELECT id, userName, userPwd,email,birthday FROM users WHERE userName = " + userName + " AND userPwd = " + userPwd;
-            ResultSet rs = stmt.executeQuery(sql);
+            sql = "SELECT * FROM users where userName = ? AND userPwd = ?";
+            // 执行 SQL 查询
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, userName);
+            stmt.setString(2, userPwd);
+            ResultSet rs = stmt.executeQuery();
 
             // 展开结果集数据库
             while (rs.next()) {
@@ -92,7 +93,7 @@ public class UserDaoImpl implements IUserDao {
             Class.forName("com.mysql.jdbc.Driver");
             // 打开一个连接
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
-            String sql = "INSERT INTO users VALUES(?,?,?,?)";
+            String sql = "INSERT INTO users (userName,userPwd,email,birthday) VALUES(?,?,?,?)";
             //实例化 PreparedStatement
             stmt = conn.prepareStatement(sql);
             //传入参数，这里的参数来自于一个带有表单的jsp文件，很容易实现
