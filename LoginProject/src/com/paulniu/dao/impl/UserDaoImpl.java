@@ -14,10 +14,10 @@ public class UserDaoImpl implements IUserDao {
 
     //JDBC驱动名以及数据库URL
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/webproject";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/javawebdb";
     // 数据库的用户名和密码
     static final String USER = "root";
-    static final String PASS = "123456";
+    static final String PASS = "root";
 
     @Override
     public User find(String userName, String userPwd) {
