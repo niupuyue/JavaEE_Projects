@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paulniu.mybatis_01.IUserDao">
+    <select id="findAll" resultType="com.paulniu.domain.User">
+        select * from user
+    </select>
+    <select id="findById" resultType="com.paulniu.domain.User" parameterType="int">
+        select * from user where id = #{uid}
+    </select>
+
+    <insert id="saveUser" parameterType="com.paulniu.domain.User">
+        insert into user (username,birthday,sex,address) values (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+    <update id="updateUser" parameterType="com.paulniu.domain.User">
+        update user set username = #{username} ,birthday=#{birthday},sex=#{sex},address=#{address} where id = #{id}
+    </update>
+
+    <delete id="deleteUser" parameterType="Integer">
+        delete from user where id = #{id}
+    </delete>
+
+    <select id="findTotal" resultType="Integer">
+        select count(*) from user;
+    </select>
+</mapper>
