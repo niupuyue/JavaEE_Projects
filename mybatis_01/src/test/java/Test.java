@@ -1,3 +1,4 @@
+import com.paulniu.domain.QueryVo;
 import com.paulniu.domain.User;
 import com.paulniu.mybatis_01.IUserDao;
 import org.apache.ibatis.io.Resources;
@@ -15,7 +16,7 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
         is = Resources.getResourceAsStream("SQLMapConfig.xml");
-        findTotal();
+        findByVo();
         is.close();
     }
 
@@ -111,6 +112,25 @@ public class Test {
         IUserDao userDao = session.getMapper(IUserDao.class);
         int count = userDao.findTotal();
         System.out.println(count);
+        session.close();
+    }
+
+    /**
+     * 使用pojo封装类
+     */
+    public static void findByVo(){
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(is);
+        SqlSession session = factory.openSession();
+        IUserDao userDao = session.getMapper(IUserDao.class);
+        QueryVo vo = new QueryVo();
+        User user = new User();
+        user.setUsername("%小%");
+        vo.setUser(user);
+        List<User> users = userDao.findByVo(vo);
+        for (User uu:users){
+            System.out.println(uu.toString());
+        }
         session.close();
     }
 

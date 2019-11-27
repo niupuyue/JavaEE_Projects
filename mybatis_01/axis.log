@@ -312,3 +312,17 @@
 2019-11-26 20:57:43,196 539    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@64bf3bbf]
 2019-11-26 20:57:43,197 540    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@64bf3bbf]
 2019-11-26 20:57:43,197 540    [           main] DEBUG source.pooled.PooledDataSource  - Returned connection 1690254271 to pool.
+2019-11-27 18:59:54,717 0      [           main] DEBUG ache.ibatis.logging.LogFactory  - Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
+2019-11-27 18:59:54,876 159    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2019-11-27 18:59:54,876 159    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2019-11-27 18:59:54,876 159    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2019-11-27 18:59:54,877 160    [           main] DEBUG source.pooled.PooledDataSource  - PooledDataSource forcefully closed/removed all connections.
+2019-11-27 18:59:54,984 267    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Opening JDBC Connection
+2019-11-27 18:59:55,186 469    [           main] DEBUG source.pooled.PooledDataSource  - Created connection 230835489.
+2019-11-27 18:59:55,186 469    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Setting autocommit to false on JDBC Connection [com.mysql.jdbc.JDBC4Connection@dc24521]
+2019-11-27 18:59:55,188 471    [           main] DEBUG u.mybatis_01.IUserDao.findByVo  - ==>  Preparing: select * from user where username like ? 
+2019-11-27 18:59:55,216 499    [           main] DEBUG u.mybatis_01.IUserDao.findByVo  - ==> Parameters: %小%(String)
+2019-11-27 18:59:55,238 521    [           main] DEBUG u.mybatis_01.IUserDao.findByVo  - <==      Total: 2
+2019-11-27 18:59:55,243 526    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Resetting autocommit to true on JDBC Connection [com.mysql.jdbc.JDBC4Connection@dc24521]
+2019-11-27 18:59:55,243 526    [           main] DEBUG ansaction.jdbc.JdbcTransaction  - Closing JDBC Connection [com.mysql.jdbc.JDBC4Connection@dc24521]
+2019-11-27 18:59:55,243 526    [           main] DEBUG source.pooled.PooledDataSource  - Returned connection 230835489 to pool.
