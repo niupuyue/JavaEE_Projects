@@ -21,4 +21,6 @@ public interface IUserDao {
 
     //根据QueryVo条件查询
     List<User> findByVo(QueryVo queryVo);
+
+    List<User> findByUser(User user);
 }

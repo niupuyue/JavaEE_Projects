@@ -121,7 +121,7 @@ public class Test {
     public static void findByVo(){
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(is);
-        SqlSession session = factory.openSession();
+        SqlSession session = factory.openSession(true);
         IUserDao userDao = session.getMapper(IUserDao.class);
         QueryVo vo = new QueryVo();
         User user = new User();
