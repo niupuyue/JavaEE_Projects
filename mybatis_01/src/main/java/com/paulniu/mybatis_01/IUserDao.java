@@ -23,4 +23,6 @@ public interface IUserDao {
     List<User> findByVo(QueryVo queryVo);
 
     List<User> findByUser(User user);
+
+    List<User> findByUser2(User user);
 }

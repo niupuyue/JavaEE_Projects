@@ -16,7 +16,7 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
         is = Resources.getResourceAsStream("SQLMapConfig.xml");
-        findByVo();
+        findByUser2();
         is.close();
     }
 
@@ -39,7 +39,7 @@ public class Test {
     /**
      * 根据id查询用户
      */
-    public static void findById(){
+    public static void findById() {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(is);
         SqlSession session = factory.openSession();
@@ -52,7 +52,7 @@ public class Test {
     /**
      * 保存新用户
      */
-    public static void saveUser(){
+    public static void saveUser() {
         User user = new User();
         user.setUsername("孙悟空");
         user.setSex("男");
@@ -71,7 +71,7 @@ public class Test {
     /**
      * 更新用户信息
      */
-    public static void updateUser(){
+    public static void updateUser() {
         User user = new User();
         user.setUsername("孙悟饭");
         user.setSex("男");
@@ -91,7 +91,7 @@ public class Test {
     /**
      * 删除用户
      */
-    public static void deleteUser(){
+    public static void deleteUser() {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(is);
         SqlSession session = factory.openSession();
@@ -105,7 +105,7 @@ public class Test {
     /**
      * 查询数据总数
      */
-    public static void findTotal(){
+    public static void findTotal() {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(is);
         SqlSession session = factory.openSession();
@@ -118,7 +118,7 @@ public class Test {
     /**
      * 使用pojo封装类
      */
-    public static void findByVo(){
+    public static void findByVo() {
         SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
         SqlSessionFactory factory = builder.build(is);
         SqlSession session = factory.openSession(true);
@@ -128,6 +128,36 @@ public class Test {
         user.setUsername("%小%");
         vo.setUser(user);
         List<User> users = userDao.findByVo(vo);
+        for (User uu : users) {
+            System.out.println(uu.toString());
+        }
+        session.close();
+    }
+
+    public static void findByUser() {
+        User user = new User();
+        user.setUsername("%小%");
+        user.setAddress("%门头沟%");
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(is);
+        SqlSession session = factory.openSession(true);
+        IUserDao dao = session.getMapper(IUserDao.class);
+        List<User> users = dao.findByUser(user);
+        for (User uu : users) {
+            System.out.println(uu.toString());
+        }
+        session.close();
+    }
+
+    public static void findByUser2(){
+        User user = new User();
+        user.setAddress("%门头沟%");
+        user.setUsername("%小%");
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(is);
+        SqlSession session = factory.openSession(true);
+        IUserDao userDao = session.getMapper(IUserDao.class);
+        List<User> users = userDao.findByUser2(user);
         for (User uu:users){
             System.out.println(uu.toString());
         }

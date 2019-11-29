@@ -26,7 +26,29 @@
         select count(*) from user;
     </select>
 
-    <select id="findByVo" parameterType="com.paulniu.domain.QueryVo" resultType="com.paulniu.domain.User" >
+    <select id="findByVo" parameterType="com.paulniu.domain.QueryVo" resultType="com.paulniu.domain.User">
         select * from user where username like #{user.username}
+    </select>
+
+    <select id="findByUser" resultType="com.paulniu.domain.User" parameterType="com.paulniu.domain.User">
+        select * from user where 1 = 1
+        <if test="username!=null and username != ' '.toString()">
+            and username like #{username}
+        </if>
+        <if test="address != null">
+            and address like #{address}
+        </if>
+    </select>
+
+    <select id="findByUser2" resultType="com.paulniu.domain.User" parameterType="com.paulniu.domain.User">
+        select * from user where 1 = 1
+        <where>
+            <if test="username != null and username != ' '.toString()">
+                and username like #{username}
+            </if>
+            <if test="address != null">
+                and address like #{address}
+            </if>
+        </where>
     </select>
 </mapper>
