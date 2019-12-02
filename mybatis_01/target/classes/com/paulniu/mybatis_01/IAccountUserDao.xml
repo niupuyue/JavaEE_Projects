@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.paulniu.mybatis_01.IAccountUserDao">
+    <!--简历对应关系-->
+    <resultMap id="accountMap" type="com.paulniu.domain.Account">
+        <id column="aid" property="id"/>
+        <result column="uid" property="uid"/>
+        <result column="money" property="money"/>   <!-- 它是用于指定从表方的引用实体属性的 -->
+        <association property="user" javaType="com.paulniu.domain.User">
+            <id column="id" property="id"/>
+            <result column="username" property="username"/>
+            <result column="sex" property="sex"/>
+            <result column="birthday" property="birthday"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+    <select id="findAll" resultType="com.paulniu.domain.AccountUser">
+        select account.*,user.username,user.address from account,user where account.uid = user.id
+    </select>
+
+    <select id="findAll2" resultType="com.paulniu.domain.Account">
+        select u.*,a.id as aid,a.uid,a.money from account a,user u where a.uid =u.id
+    </select>
+</mapper>

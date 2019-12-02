@@ -1,6 +1,8 @@
 package com.paulniu.mybatis_01;
 
+import com.paulniu.domain.AccountUser;
 import com.paulniu.domain.QueryVo;
+import com.paulniu.domain.QueryVo2;
 import com.paulniu.domain.User;
 
 import java.util.List;
@@ -25,4 +27,8 @@ public interface IUserDao {
     List<User> findByUser(User user);
 
     List<User> findByUser2(User user);
+
+    List<User> findInIds(QueryVo2 queryVo);
+
+    List<AccountUser> findAll2();
 }

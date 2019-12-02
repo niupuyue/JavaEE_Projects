@@ -1,5 +1,5 @@
-import com.paulniu.domain.QueryVo;
-import com.paulniu.domain.User;
+import com.paulniu.domain.*;
+import com.paulniu.mybatis_01.IAccountUserDao;
 import com.paulniu.mybatis_01.IUserDao;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class Test {
 
     public static void main(String[] args) throws IOException {
         is = Resources.getResourceAsStream("SQLMapConfig.xml");
-        findByUser2();
+        findAll3();
         is.close();
     }
 
@@ -149,7 +150,7 @@ public class Test {
         session.close();
     }
 
-    public static void findByUser2(){
+    public static void findByUser2() {
         User user = new User();
         user.setAddress("%门头沟%");
         user.setUsername("%小%");
@@ -158,10 +159,49 @@ public class Test {
         SqlSession session = factory.openSession(true);
         IUserDao userDao = session.getMapper(IUserDao.class);
         List<User> users = userDao.findByUser2(user);
-        for (User uu:users){
+        for (User uu : users) {
             System.out.println(uu.toString());
         }
         session.close();
+    }
+
+    public static void findInIds() {
+        QueryVo2 queryVo2 = new QueryVo2();
+        List<Integer> ids = new ArrayList<Integer>();
+        ids.add(40);
+        ids.add(42);
+        ids.add(47);
+        queryVo2.setIds(ids);
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(is);
+        SqlSession session = factory.openSession(true);
+        IUserDao userDao = session.getMapper(IUserDao.class);
+        List<User> users = userDao.findInIds(queryVo2);
+        for (User user : users) {
+            System.out.println(user.toString());
+        }
+    }
+
+    public static void findAll2(){
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(is);
+        SqlSession session = factory.openSession(true);
+        IAccountUserDao dao = session.getMapper(IAccountUserDao.class);
+        List<AccountUser> accountUsers = dao.findAll();
+        for (AccountUser user : accountUsers){
+            System.out.println(user.toString());
+        }
+    }
+
+    public static void findAll3(){
+        SqlSessionFactoryBuilder builder = new SqlSessionFactoryBuilder();
+        SqlSessionFactory factory = builder.build(is);
+        SqlSession session = factory.openSession(true);
+        IAccountUserDao dao = session.getMapper(IAccountUserDao.class);
+        List<Account> accounts = dao.findAll2();
+        for (Account account:accounts){
+            System.out.println(account.toString());
+        }
     }
 
 }

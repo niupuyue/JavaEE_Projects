@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.paulniu.mybatis_01.IUserDao">
+
+    <sql id="defaultUser">
+        select * from user
+    </sql>
+
     <select id="findAll" resultType="com.paulniu.domain.User">
         select * from user
     </select>
@@ -26,7 +31,42 @@
         select count(*) from user;
     </select>
 
-    <select id="findByVo" parameterType="com.paulniu.domain.QueryVo" resultType="com.paulniu.domain.User" >
+    <select id="findByVo" parameterType="com.paulniu.domain.QueryVo" resultType="com.paulniu.domain.User">
         select * from user where username like #{user.username}
     </select>
+
+    <select id="findByUser" resultType="com.paulniu.domain.User" parameterType="com.paulniu.domain.User">
+        select * from user where 1 = 1
+        <if test="username!=null and username != ' '.toString()">
+            and username like #{username}
+        </if>
+        <if test="address != null">
+            and address like #{address}
+        </if>
+    </select>
+
+    <select id="findByUser2" resultType="com.paulniu.domain.User" parameterType="com.paulniu.domain.User">
+        select * from user where 1 = 1
+        <where>
+            <if test="username != null and username != ' '.toString()">
+                and username like #{username}
+            </if>
+            <if test="address != null">
+                and address like #{address}
+            </if>
+        </where>
+    </select>
+
+    <select id="findInIds" resultType="com.paulniu.domain.User" parameterType="com.paulniu.domain.QueryVo2">
+        <include refid="defaultUser" />
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in ( " close=")" item="uid"  separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
 </mapper>

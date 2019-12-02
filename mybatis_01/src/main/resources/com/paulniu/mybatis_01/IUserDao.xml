@@ -3,6 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.paulniu.mybatis_01.IUserDao">
+
+    <sql id="defaultUser">
+        select * from user
+    </sql>
+
     <select id="findAll" resultType="com.paulniu.domain.User">
         select * from user
     </select>
@@ -51,4 +56,17 @@
             </if>
         </where>
     </select>
+
+    <select id="findInIds" resultType="com.paulniu.domain.User" parameterType="com.paulniu.domain.QueryVo2">
+        <include refid="defaultUser" />
+        <where>
+            <if test="ids != null and ids.size() > 0">
+                <foreach collection="ids" open="and id in ( " close=")" item="uid"  separator=",">
+                    #{uid}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+
 </mapper>
